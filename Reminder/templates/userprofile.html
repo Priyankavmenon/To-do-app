@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block body %}
+<table class="ptable table" action="" method="post">
+    {%csrf_token%}
+    <thead>
+        <th>Username
+
+        </th>
+        <th>Password</th>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Email</th>
+    </thead>
+   {% for i in d %}
+    <tr><td>{{i.username}}</td>
+    <td>{{i.password}}</td>
+    <td>{{i.first_name}}</td>
+    <td>{{i.last_name}}</td>
+    <td>{{i.email}}</td>
+    <td><a href="{% url 'update' i.id %}" class="btn-outline-success">Update</a></td>
+    <td><a href="" class="btn-outline-success">Delete</a></td>
+    </tr>
+    {% endfor %}
+    
+</table>
+{% endblock %}

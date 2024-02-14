@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block body %}
+
+
+<form class="lform" action="" method="post">
+    {%csrf_token%}
+    {{f}}
+    <button type="submit" >Update</button>
+</form>
+{% for i in messages %}
+<div class="alert alert-dark" role="alert">
+    {{i}}
+  </div>
+  {% endfor %}
+{% endblock %}

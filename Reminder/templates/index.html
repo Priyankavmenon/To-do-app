@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block body %}
+{% load static %}
+
+
+<form class="tform" action="" method="post">
+    {%csrf_token%}
+    <h3>Welcome {{request.user}}</h3>
+    {{tf}}
+    <button type="submit">Add</button>
+
+</form>
+
+
+<h3 class="heading"><u>Task Table</u></h3>
+<table class="ttable ">
+    
+    <thead>
+        <td>ID</td>
+        <td>Name</td>
+        <td>Date</td>
+        <td>Status</td>
+        <td>Edit</td>
+        <td>Delete</td>
+    </thead>
+    {% for i in tn %}
+    
+    <tr>
+  
+    <td>{{i.id}}</td>
+    <td>{{i.name}}</td>
+    <td>{{i.date}}</td>
+    {% if i.completed == False %} 
+    <td>{{i.completed}} 
+    </td>
+        {% else %}
+        <td><svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg></td>
+        {% endif %} 
+        
+    {% if i.completed == False %}
+    <td><a href="{% url 'edit' i.id %}" class="btn-outline-success">Pending</a></td>
+    {% elif i.completed == True %}
+    <td><a href="{% url 'edit' i.id %}" class="btn-outline-success">Completed</a></td>
+    {% endif %}
+    
+    <td><a href="{% url 'delete' i.id %}" class="btn-outline-success">Delete</a></td>
+    
+{% endfor %}
+    <tr>
+
+        
+    </tr>
+</table> 
+{% for i in messages %}
+<div class="alert alert-dark" role="alert">
+    {{i}}
+  </div>
+  {% endfor %}
+{% endblock %}
